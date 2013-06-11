@@ -161,17 +161,18 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 							String dirName = ((EditText) view.findViewById(R.id.rename)).getText().toString();
 							String newFile = currentDir.getText().toString() + "/" + dirName;
 							if (new File(newFile).exists()) {
-								Log.v(Name, "level 4 File(newFile).exits");
+								Log.v(Name, "level4 File(newFile).exits");
 								Toast.makeText(MainActivity.this, "文件夹已存在", Toast.LENGTH_LONG).show();
 								return;
 							}
 							File f = new File(currentDir.getText().toString(), dirName);
 							f.mkdir();
+							loadFiles(new File(currentDir.getText().toString()));
+							Log.v(Name, "level test2");
 						}
 					}).create();
 			d.show();
 			
-			loadFiles(new File(currentDir.getText().toString()));
 		} else if (item.getItemId() == R.id.about) {
 			Log.v(Name, "level2 item.getItemId() == R.id.about");
 			Dialog d = new AlertDialog.Builder(MainActivity.this).setTitle("文件浏览器1.0beta").setMessage("本程序由李洪祥 赵岩制作")
