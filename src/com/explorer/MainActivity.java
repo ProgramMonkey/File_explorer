@@ -52,19 +52,19 @@ import com.file.R;
 
 public class MainActivity extends Activity implements OnClickListener,
 		OnItemClickListener, OnItemLongClickListener {
-	private TextView currentDir;// ÓÃÓÚÏÔÊ¾ÎÄ¼ş¼ĞµÄ¶îÄ¿Â¼£¬ÔØÈëÏàÓ¦µÄÎÄ¼ş¼Ğ£¬ÎªĞÂ½¨µÄÎÄ¼ş¼Ğ½¨Á¢ÏàÓ¦µÄÄ¿Â¼
-	private Button btnC;// ÊÖ»úÄÚ´æ ÓÃÓÚ¶¨Î»¸ùÄ¿Â¼
-	private Button btnE;// ´æ´¢¿¨ ÓÃÓÚ¶¨Î»¸ùÄ¿Â¼
-	private ListView listView; // ÏÔÊ¾ÏàÓ¦°´ÎÄ¼ş¼Ğ
-	private File rootDir; // ¸ùÄ¿Â¼ÎÄ¼ş¼Ğ
-	private File copyPath; // µ±Ö´ĞĞ¸´ÖÆ¡¢Õ³ÌùµÈ¹¤×÷Ê±£¬½«Ô­µØÖ·´æ´¢µ½copyPathÖĞ¼ÇÂ¼
-	private String flag;// ÓÃÓÚ¼ÇÂ¼Ö´ĞĞµÄ²Ù×÷£¬°üÀ¨¸´ÖÆ¡¢¼ôÇĞµÈ
-	private String startFilePath;// µ±Ö´ĞĞÕ³ÌùµÈ¹¤×÷Ê±£¬¼ÇÂ¼Ô­µØÖ·
-	private String desFilePath;// µ±Ö´ĞĞÕ³ÌùµÈ¹¤×÷Ê±¼ÇÂ¼Ä¿µÄµØÖ·
-	private ProgressDialog progressDialog;// ÓÃÓÚ¸´ÖÆÊ±µÄ½ø¶ÈÌõ
-	private int currentLen = 0;// ÓÃÓÚ¼ÇÂ¼¸´ÖÆµ±Ç°µÄÎÄ¼ş£¨¼Ğ£©Êı
-	private long totaLength = 0;// ÓÃÓÚ¼ÇÂ¼×Ü¹²Òª¸´ÖÆµÄÎÄ¼ş£¨¼Ğ£©Êı
-	private Handler messageHandler; // Ö÷Òª½ÓÊÜ×ÓÏß³Ì·¢ËÍµÄÊı¾İ, ²¢ÓÃ´ËÊı¾İÅäºÏÖ÷Ïß³Ì¸üĞÂUI.
+	private TextView currentDir;// ç”¨äºæ˜¾ç¤ºæ–‡ä»¶å¤¹çš„é¢ç›®å½•ï¼Œè½½å…¥ç›¸åº”çš„æ–‡ä»¶å¤¹ï¼Œä¸ºæ–°å»ºçš„æ–‡ä»¶å¤¹å»ºç«‹ç›¸åº”çš„ç›®å½•
+	private Button btnC;// æ‰‹æœºå†…å­˜ ç”¨äºå®šä½æ ¹ç›®å½•
+	private Button btnE;// å­˜å‚¨å¡ ç”¨äºå®šä½æ ¹ç›®å½•
+	private ListView listView; // æ˜¾ç¤ºç›¸åº”æŒ‰æ–‡ä»¶å¤¹
+	private File rootDir; // æ ¹ç›®å½•æ–‡ä»¶å¤¹
+	private File copyPath; // å½“æ‰§è¡Œå¤åˆ¶ã€ç²˜è´´ç­‰å·¥ä½œæ—¶ï¼Œå°†åŸåœ°å€å­˜å‚¨åˆ°copyPathä¸­è®°å½•
+	private String flag;// ç”¨äºè®°å½•æ‰§è¡Œçš„æ“ä½œï¼ŒåŒ…æ‹¬å¤åˆ¶ã€å‰ªåˆ‡ç­‰
+	private String startFilePath;// å½“æ‰§è¡Œç²˜è´´ç­‰å·¥ä½œæ—¶ï¼Œè®°å½•åŸåœ°å€
+	private String desFilePath;// å½“æ‰§è¡Œç²˜è´´ç­‰å·¥ä½œæ—¶è®°å½•ç›®çš„åœ°å€
+	private ProgressDialog progressDialog;// ç”¨äºå¤åˆ¶æ—¶çš„è¿›åº¦æ¡
+	private int currentLen = 0;// ç”¨äºè®°å½•å¤åˆ¶å½“å‰çš„æ–‡ä»¶ï¼ˆå¤¹ï¼‰æ•°
+	private long totaLength = 0;// ç”¨äºè®°å½•æ€»å…±è¦å¤åˆ¶çš„æ–‡ä»¶ï¼ˆå¤¹ï¼‰æ•°
+	private Handler messageHandler; // ä¸»è¦æ¥å—å­çº¿ç¨‹å‘é€çš„æ•°æ®, å¹¶ç”¨æ­¤æ•°æ®é…åˆä¸»çº¿ç¨‹æ›´æ–°UI.
 	private static String Name = "MainActivity";
 
 	/** Called when the activity is first created. */
@@ -75,19 +75,19 @@ public class MainActivity extends Activity implements OnClickListener,
 		setContentView(R.layout.main);
 		currentDir = (TextView) findViewById(R.id.currentDir);
 		// fileName = (TextView) findViewById(R.id.name);
-		btnC = (Button) findViewById(R.id.btnC);// ÊÖ»úÄÚ´æ°´Å¥µÄÉùÃ÷
-		btnE = (Button) findViewById(R.id.btnE);// ´æ´¢¿¨°´Å¥µÄÉùÃ÷
-		btnC.setOnClickListener(this);// ÎªÊÖ»úÄÚ´æ°´Å¥ÉèÖÃ¼àÌıÆ÷
-		btnE.setOnClickListener(this);// Îª´æ´¢¿¨°´Å¥ÉèÖÃ¼àÌıÆ÷
-		listView = (ListView) findViewById(R.id.listView);// ÎÄ¼şÁĞ±íµÄêÉÃô
-		listView.setOnItemClickListener(this);// ÎªÃ¿¸öÎÄ¼ş£¨¼Ğ£©ÉèÖÃ¶Ì°´µÄ¼àÌıÆ÷
-		listView.setOnItemLongClickListener(this);// ÎªÃ¿¸öÎÄ¼ş£¨¼Ğ£©ÉèÖÃ³¤°´µÄ¼àÌıÆ÷
-		// µÃµ½µ±Ç°Ïß³ÌµÄLooperÊµÀı£¬ÓÉÓÚµ±Ç°Ïß³ÌÊÇUIÏß³ÌÒ²¿ÉÒÔÍ¨¹ıLooper.getMainLooper()µÃµ½
+		btnC = (Button) findViewById(R.id.btnC);// æ‰‹æœºå†…å­˜æŒ‰é’®çš„å£°æ˜
+		btnE = (Button) findViewById(R.id.btnE);// å­˜å‚¨å¡æŒ‰é’®çš„å£°æ˜
+		btnC.setOnClickListener(this);// ä¸ºæ‰‹æœºå†…å­˜æŒ‰é’®è®¾ç½®ç›‘å¬å™¨
+		btnE.setOnClickListener(this);// ä¸ºå­˜å‚¨å¡æŒ‰é’®è®¾ç½®ç›‘å¬å™¨
+		listView = (ListView) findViewById(R.id.listView);// æ–‡ä»¶åˆ—è¡¨çš„æ™Ÿæ•
+		listView.setOnItemClickListener(this);// ä¸ºæ¯ä¸ªæ–‡ä»¶ï¼ˆå¤¹ï¼‰è®¾ç½®çŸ­æŒ‰çš„ç›‘å¬å™¨
+		listView.setOnItemLongClickListener(this);// ä¸ºæ¯ä¸ªæ–‡ä»¶ï¼ˆå¤¹ï¼‰è®¾ç½®é•¿æŒ‰çš„ç›‘å¬å™¨
+		// å¾—åˆ°å½“å‰çº¿ç¨‹çš„Looperå®ä¾‹ï¼Œç”±äºå½“å‰çº¿ç¨‹æ˜¯UIçº¿ç¨‹ä¹Ÿå¯ä»¥é€šè¿‡Looper.getMainLooper()å¾—åˆ°
 		messageHandler = new MessageHandler(Looper.myLooper());
 
-		// ÉèÖÃ¸ùÄ¿Â¼
+		// è®¾ç½®æ ¹ç›®å½•
 
-		if (Environment.getExternalStorageState().equals(//ÅĞ¶ÏÊÇ·ñ¹ÒÔØSD¿¨
+		if (Environment.getExternalStorageState().equals(//åˆ¤æ–­æ˜¯å¦æŒ‚è½½SDå¡
 				Environment.MEDIA_MOUNTED)) {
 			Log.v(Name,
 					"level2 Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)");
@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		loadFiles(rootDir);
 	}
 
-	// ×Ô¶¨ÒåHandler
+	// è‡ªå®šä¹‰Handler
 	class MessageHandler extends Handler {
 		public MessageHandler(Looper looper) {
 			super(looper);
@@ -122,14 +122,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		Map<String, Object> map = (Map<String, Object>) this.listView.getItemAtPosition(0);
 		final File file = (File) map.get("file");
 		final String str = (String)map.get("name");
-		//Èç¹û²»ÊÇ¸ùÄ¿Â¼£¬Ôò·µ»ØÉÏÒ»²ãÄ¿Â¼
-		if(str.equals("ÉÏÒ»¼¶Ä¿Â¼"))
+		//å¦‚æœä¸æ˜¯æ ¹ç›®å½•ï¼Œåˆ™è¿”å›ä¸Šä¸€å±‚ç›®å½•
+		if(str.equals("ä¸Šä¸€çº§ç›®å½•"))
 		{
 			Log.v(Name, "level2 notrootDir");
 			loadFiles(file);
 			return true;
 		}
-		else//Èç¹ûÎª¸ùÄ¿Â¼£¬ÔòÍË³ö
+		else//å¦‚æœä¸ºæ ¹ç›®å½•ï¼Œåˆ™é€€å‡º
 		{
 			Log.v(Name, "level2 isrootDir");
 			return super.onKeyDown(keyCode, event);
@@ -140,7 +140,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
 
 	@Override
-	//³õÊ¼»¯²Ëµ¥£¬Ö»»áÔÚµÚÒ»´Î³õÊ¼»¯²Ëµ¥Ê±µ÷ÓÃ
+	//åˆå§‹åŒ–èœå•ï¼Œåªä¼šåœ¨ç¬¬ä¸€æ¬¡åˆå§‹åŒ–èœå•æ—¶è°ƒç”¨
 	public boolean onCreateOptionsMenu(Menu menu) {
 		Log.v(Name, "level1 onCreateOptionsMenu");
 		MenuInflater inflater = getMenuInflater();
@@ -154,16 +154,16 @@ public class MainActivity extends Activity implements OnClickListener,
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Log.v(Name, "level1 onOptionsItemSelected");
 
-		// Èç¹ûÑ¡ÔñµÄÊÇĞÂ½¨ÎÄ¼ş¼ĞÑ¡Ïî
+		// å¦‚æœé€‰æ‹©çš„æ˜¯æ–°å»ºæ–‡ä»¶å¤¹é€‰é¡¹
 		if (item.getItemId() == R.id.newFile) {
 			Log.v(Name, "level2 item.getItemId() == R.id.newFile");
 			LayoutInflater factory = LayoutInflater.from(MainActivity.this);
 			final View view = factory.inflate(R.layout.rename, null);
 			AlertDialog d = new AlertDialog.Builder(MainActivity.this)
 					.setCancelable(true)
-					.setMessage("ÎÄ¼ş¼ĞÃû")
+					.setMessage("æ–‡ä»¶å¤¹å")
 					.setView(view)
-					.setPositiveButton("È·¶¨",
+					.setPositiveButton("ç¡®å®š",
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
@@ -178,7 +178,7 @@ public class MainActivity extends Activity implements OnClickListener,
 										Log.v(Name,
 												"level 4 File(newFile).exits");
 										Toast.makeText(MainActivity.this,
-												"ÎÄ¼ş¼ĞÒÑ´æÔÚ", Toast.LENGTH_LONG)
+												"æ–‡ä»¶å¤¹å·²å­˜åœ¨", Toast.LENGTH_LONG)
 												.show();
 										return;
 									}
@@ -192,8 +192,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		} else if (item.getItemId() == R.id.about) {
 			Log.v(Name, "level2 item.getItemId() == R.id.about");
 			Dialog d = new AlertDialog.Builder(MainActivity.this)
-					.setTitle("ÎÄ¼şä¯ÀÀÆ÷1.0beta").setMessage("±¾³ÌĞòÓÉÀîºéÏé ÕÔÑÒÖÆ×÷")
-					.setPositiveButton("È·¶¨", null).create();
+					.setTitle("æ–‡ä»¶æµè§ˆå™¨1.0beta").setMessage("æœ¬ç¨‹åºç”±ææ´ªç¥¥ èµµå²©åˆ¶ä½œ")
+					.setPositiveButton("ç¡®å®š", null).create();
 			d.show();
 		} else if (item.getItemId() == R.id.exit) {
 			Log.v(Name, "level2 item.getItemId() == R.id.exit");
@@ -203,32 +203,32 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ¼ÓÔØµ±Ç°ÎÄ¼ş¼ĞÁĞ±í
+	 * åŠ è½½å½“å‰æ–‡ä»¶å¤¹åˆ—è¡¨
 	 * 
 	 */
 	public void loadFiles(File dir) {
 		Log.v(Name, "level1 loadFiles");
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();// ÉùÃ÷Ò»¸öMapÊı×é£¬ÓÃÀ´´æ´¢ÎÄ¼ş£¨¼Ğ£©µÄÏÔÊ¾ĞÅÏ¢
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();// å£°æ˜ä¸€ä¸ªMapæ•°ç»„ï¼Œç”¨æ¥å­˜å‚¨æ–‡ä»¶ï¼ˆå¤¹ï¼‰çš„æ˜¾ç¤ºä¿¡æ¯
 
-		// Èç¹ûÄ¿Â¼²»Îª¿ÕµÄ»¯£¬ÔòÏÔÊ¾ÏàÓ¦µÄÎÄ¼ş£¨¼Ğ£©ĞÅÏ¢
+		// å¦‚æœç›®å½•ä¸ä¸ºç©ºçš„åŒ–ï¼Œåˆ™æ˜¾ç¤ºç›¸åº”çš„æ–‡ä»¶ï¼ˆå¤¹ï¼‰ä¿¡æ¯
 		if (dir != null) {
 			Log.v(Name, "level2 dir!= NULL");
-			// Èç¹û²»ÊÇ¸ùÄ¿Â¼µÄ»°£¬ÔòÎª ÉÏ¼¶Ä¿Â¼ÔÚListViewµÄ×îÉÏ·½ÁôÒ»¸ö½Ó¿Ú
+			// å¦‚æœä¸æ˜¯æ ¹ç›®å½•çš„è¯ï¼Œåˆ™ä¸º ä¸Šçº§ç›®å½•åœ¨ListViewçš„æœ€ä¸Šæ–¹ç•™ä¸€ä¸ªæ¥å£
 			if (!dir.getAbsolutePath().equals(rootDir.getAbsolutePath())) {
 				Log.v(Name,
 						"level3 !dir.getAbsolutePath().equals(rootDir.getAbsolutePath())");
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("file", dir.getParentFile());
-				map.put("name", "ÉÏÒ»¼¶Ä¿Â¼");
+				map.put("name", "ä¸Šä¸€çº§ç›®å½•");
 				map.put("img", R.drawable.folder);
 				list.add(map);
 			}
-			// ÉèÖÃÏÔÊ¾Ä¿Â¼
+			// è®¾ç½®æ˜¾ç¤ºç›®å½•
 			currentDir.setText(dir.getAbsolutePath());
 			File[] files = dir.listFiles();
 			sortFiles(files);
 
-			// ÎªÃ¿¸úÎÄ¼ş£¨¼Ğ£©µÄÏÔÊ¾×ö×¼±¸£¬ÏÈ½«ĞÅÏ¢´æ´¢ÆğÀ´
+			// ä¸ºæ¯è·Ÿæ–‡ä»¶ï¼ˆå¤¹ï¼‰çš„æ˜¾ç¤ºåšå‡†å¤‡ï¼Œå…ˆå°†ä¿¡æ¯å­˜å‚¨èµ·æ¥
 
 			if (files != null) {
 				Log.v(Name, "level2 files!=NULL");
@@ -245,11 +245,11 @@ public class MainActivity extends Activity implements OnClickListener,
 				}
 			}
 
-		} else {// Èç¹ûÄ¿Â¼²»´æÔÚÔòÌáÊ¾´íÎó
+		} else {// å¦‚æœç›®å½•ä¸å­˜åœ¨åˆ™æç¤ºé”™è¯¯
 			Log.v(Name, "level2 Files == NULL");
-			Toast.makeText(this, "Ä¿Â¼²»ÕıÈ·£¬ÇëÊäÈëÕıÈ·µÄÄ¿Â¼!", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "ç›®å½•ä¸æ­£ç¡®ï¼Œè¯·è¾“å…¥æ­£ç¡®çš„ç›®å½•!", Toast.LENGTH_LONG).show();
 		}
-		// ÏÔÊ¾ÎÄ¼ş£¨¼Ğ£©ĞÅÏ¢
+		// æ˜¾ç¤ºæ–‡ä»¶ï¼ˆå¤¹ï¼‰ä¿¡æ¯
 		ListAdapter adapter = new SimpleAdapter(this, list, R.layout.item,
 				new String[] { "name", "img" }, new int[] { R.id.name,
 						R.id.icon });
@@ -258,7 +258,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ÅÅĞòÎÄ¼şÁĞ±í
+	 * æ’åºæ–‡ä»¶åˆ—è¡¨
 	 * 
 	 */
 	private void sortFiles(File[] files) {
@@ -281,7 +281,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ´ò¿ªÎÄ¼ş
+	 * æ‰“å¼€æ–‡ä»¶
 	 * 
 	 * @param file
 	 */
@@ -289,19 +289,19 @@ public class MainActivity extends Activity implements OnClickListener,
 		Log.v(Name, "level1 openFile");
 		Intent intent = new Intent();
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		// ÉèÖÃintentµÄActionÊôĞÔ
+		// è®¾ç½®intentçš„Actionå±æ€§
 		intent.setAction(Intent.ACTION_VIEW);
-		// »ñÈ¡ÎÄ¼şfileµÄMIMEÀàĞÍ
+		// è·å–æ–‡ä»¶fileçš„MIMEç±»å‹
 		String type = getMIMEType(file);
-		// ÉèÖÃintentµÄdataºÍTypeÊôĞÔ¡£
+		// è®¾ç½®intentçš„dataå’ŒTypeå±æ€§ã€‚
 		intent.setDataAndType(Uri.fromFile(file), type);
-		// Ìø×ª
+		// è·³è½¬
 		startActivity(intent);
 
 	}
 
 	/**
-	 * ¸ù¾İÎÄ¼şºó×ºÃû»ñµÃ¶ÔÓ¦µÄMIMEÀàĞÍ¡£
+	 * æ ¹æ®æ–‡ä»¶åç¼€åè·å¾—å¯¹åº”çš„MIMEç±»å‹ã€‚
 	 * 
 	 * @param file
 	 */
@@ -309,19 +309,19 @@ public class MainActivity extends Activity implements OnClickListener,
 		Log.v(Name, "level1 getMIMEType");
 		String type = "*/*";
 		String fName = file.getName();
-		// »ñÈ¡ºó×ºÃûÇ°µÄ·Ö¸ô·û"."ÔÚfNameÖĞµÄÎ»ÖÃ¡£
+		// è·å–åç¼€åå‰çš„åˆ†éš”ç¬¦"."åœ¨fNameä¸­çš„ä½ç½®ã€‚
 		int dotIndex = fName.lastIndexOf(".");
 		if (dotIndex < 0) {
 			Log.v(Name, "level2 dotIndex<0");
 			return type;
 		}
-		/* »ñÈ¡ÎÄ¼şµÄºó×ºÃû */
+		/* è·å–æ–‡ä»¶çš„åç¼€å */
 		String end = fName.substring(dotIndex, fName.length()).toLowerCase();
 		if (end == "") {
 			Log.v(Name, "level2 end ==  ");
 			return type;
 		}
-		// ÔÚMIMEºÍÎÄ¼şÀàĞÍµÄÆ¥Åä±íÖĞÕÒµ½¶ÔÓ¦µÄMIMEÀàĞÍ¡£
+		// åœ¨MIMEå’Œæ–‡ä»¶ç±»å‹çš„åŒ¹é…è¡¨ä¸­æ‰¾åˆ°å¯¹åº”çš„MIMEç±»å‹ã€‚
 		for (int i = 0; i < MIME_MapTable.length; i++) {
 			if (end.equals(MIME_MapTable[i][0]))
 				type = MIME_MapTable[i][1];
@@ -349,19 +349,19 @@ public class MainActivity extends Activity implements OnClickListener,
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Log.v(Name, "level1 onItemClick");
-		// »ñÈ¡ÎÄ¼ş£¨¼Ğ£©µÄÒıÓÃ
+		// è·å–æ–‡ä»¶ï¼ˆå¤¹ï¼‰çš„å¼•ç”¨
 		Map<String, Object> map = (Map<String, Object>) parent
 				.getItemAtPosition(position);
 		final File file = (File) map.get("file");
-		// Èç¹ûÊÇÎÄ¼ş¼ĞµÄ»°£¬Ôò½øÈë´ËÎÄ¼ş¼Ğ£¬ÏÔÊ¾´ËÎÄ¼ş¼ĞµÄÄÚÈİ
+		// å¦‚æœæ˜¯æ–‡ä»¶å¤¹çš„è¯ï¼Œåˆ™è¿›å…¥æ­¤æ–‡ä»¶å¤¹ï¼Œæ˜¾ç¤ºæ­¤æ–‡ä»¶å¤¹çš„å†…å®¹
 		if (file.isDirectory()) {
 			Log.v(Name, "level2 file.isDirectory");
 			try {
 				loadFiles(file);
-			} catch (Exception e) {// ÈôÓöµ½È¨ÏŞ²»×ãµÄÇé¿ö£¬Ôòµ¯³ö¾¯¸æ
-				Toast.makeText(this, "È¨ÏŞ²»×ã", Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {// è‹¥é‡åˆ°æƒé™ä¸è¶³çš„æƒ…å†µï¼Œåˆ™å¼¹å‡ºè­¦å‘Š
+				Toast.makeText(this, "æƒé™ä¸è¶³", Toast.LENGTH_SHORT).show();
 			}
-		} else {// Èç¹ıÊÇÎÄ¼ş£¬ÔòÑ¡ÔñÏàÓ¦Ó¦ÓÃ´ò¿ª´ËÎÄ¼ş
+		} else {// å¦‚è¿‡æ˜¯æ–‡ä»¶ï¼Œåˆ™é€‰æ‹©ç›¸åº”åº”ç”¨æ‰“å¼€æ­¤æ–‡ä»¶
 			openFile(file);
 		}
 	}
@@ -372,31 +372,31 @@ public class MainActivity extends Activity implements OnClickListener,
 		Map<String, Object> map = (Map<String, Object>) parent.getItemAtPosition(position);
 		final File file = (File) map.get("file");
 		AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-				.setTitle("²Ù×÷")
-				.setItems(new String[] { "¸´ÖÆ", "¼ôÇĞ", "Õ³Ìù", "·¢ËÍ", "ÖØÃüÃû", "É¾³ı", "ÊôĞÔ" },
+				.setTitle("æ“ä½œ")
+				.setItems(new String[] { "å¤åˆ¶", "å‰ªåˆ‡", "ç²˜è´´", "å‘é€", "é‡å‘½å", "åˆ é™¤", "å±æ€§" },
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								switch (which) {
 
-								case 0: // ¸´ÖÆ
+								case 0: // å¤åˆ¶
 									Log.v(Name, "level2 copy");
 									copyPath = new File(file.getAbsolutePath());
 									flag = "copy";
 									break;
-								case 1: // ¼ôÇĞ
+								case 1: // å‰ªåˆ‡
 									Log.v(Name, "level2 cut");
 									copyPath = new File(file.getAbsolutePath());
 									flag = "cut";
 									break;
-								case 2: // Õ³Ìù
+								case 2: // ç²˜è´´
 									Log.v(Name, "level2 paste");
 									final String startPath = copyPath.getAbsolutePath();
 									final String desPath = currentDir.getText().toString() + "/" + copyPath.getName();
 									File[] files = new File(currentDir.getText().toString()).listFiles();
 									for (File file : files) {
 										if (copyPath.getName().equals(file.getName())) {
-											Toast.makeText(MainActivity.this, "´ËÎÄ¼ş/ÎÄ¼ş¼ĞÒÑ´æÔÚ", Toast.LENGTH_SHORT).show();
+											Toast.makeText(MainActivity.this, "æ­¤æ–‡ä»¶/æ–‡ä»¶å¤¹å·²å­˜åœ¨", Toast.LENGTH_SHORT).show();
 											return;
 										}
 									}
@@ -404,7 +404,7 @@ public class MainActivity extends Activity implements OnClickListener,
 									int length = (int) (getLength(copyPath) / (1024));
 									progressDialog = new ProgressDialog(MainActivity.this);
 									progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-									progressDialog.setMessage("ÕıÔÚ¸´ÖÆ");
+									progressDialog.setMessage("æ­£åœ¨å¤åˆ¶");
 									progressDialog.setMax(length);
 									progressDialog.setProgress(0);
 									progressDialog.setCancelable(false);
@@ -413,11 +413,11 @@ public class MainActivity extends Activity implements OnClickListener,
 									new Thread() {
 										public void run() {
 											copy(startPath, desPath);
-											//Í¨¹ıMessage¶ÔÏóÏòÔ­Ïß³Ì´«µİĞÅÏ¢
+											//é€šè¿‡Messageå¯¹è±¡å‘åŸçº¿ç¨‹ä¼ é€’ä¿¡æ¯
 											Message message = Message.obtain();
 											messageHandler.sendMessage(message);
 											progressDialog.dismiss();
-											// Èç¹ûÎª¼ôÇĞÔòÉ¾³ı¶ÔÓ¦ÎÄ¼ş/ÎÄ¼ş¼Ğ
+											// å¦‚æœä¸ºå‰ªåˆ‡åˆ™åˆ é™¤å¯¹åº”æ–‡ä»¶/æ–‡ä»¶å¤¹
 											if ("cut".equals(flag)) {
 												if (copyPath.isFile()) {
 													copyPath.delete();
@@ -428,24 +428,24 @@ public class MainActivity extends Activity implements OnClickListener,
 										}
 									}.start();
 									break;
-								case 3: // ·¢ËÍ
+								case 3: // å‘é€
 									Log.v(Name, "level2 send");
 									break;
-								case 4: // ÖØÃüÃû
+								case 4: // é‡å‘½å
 									Log.v(Name, "level2 newName");
 									LayoutInflater factory = LayoutInflater.from(MainActivity.this);
 									final View view = factory.inflate(R.layout.rename, null);
 									((EditText) view.findViewById(R.id.rename)).setText(file.getName());
 									AlertDialog d = new AlertDialog.Builder(MainActivity.this).setCancelable(true)
-											.setMessage("ĞÂÎÄ¼şÃû").setView(view)
-											.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+											.setMessage("æ–°æ–‡ä»¶å").setView(view)
+											.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 												@Override
 												public void onClick(DialogInterface dialog, int which) {
 													String newName = ((EditText) view.findViewById(R.id.rename))
 															.getText().toString();
 													String newFile = currentDir.getText().toString() + "/" + newName;
 													if (new File(newFile).exists()) {
-														Toast.makeText(MainActivity.this, "ÎÄ¼şÃûÖØ¸´", Toast.LENGTH_LONG)
+														Toast.makeText(MainActivity.this, "æ–‡ä»¶åé‡å¤", Toast.LENGTH_LONG)
 																.show();
 														return;
 													}
@@ -455,11 +455,11 @@ public class MainActivity extends Activity implements OnClickListener,
 									d.show();
 									loadFiles(new File(currentDir.getText().toString()));
 									break;
-								case 5: // É¾³ı
+								case 5: // åˆ é™¤
 									Log.v(Name, "level2 delete");
 									AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
-											.setMessage("È·ÊµÒªÉ¾³ı" + file.getName() + "Âğ?").setCancelable(true)
-											.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+											.setMessage("ç¡®å®è¦åˆ é™¤" + file.getName() + "å—?").setCancelable(true)
+											.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 												@Override
 												public void onClick(DialogInterface dialog, int which) {
 													if (file.isFile()) {
@@ -475,16 +475,16 @@ public class MainActivity extends Activity implements OnClickListener,
 									ad.show();
 			
 									break;
-								case 6: // ÏÔÊ¾ÊôĞÔ
+								case 6: // æ˜¾ç¤ºå±æ€§
 									String[] attr = new String[] {"1", "2", "3", "4"};
 
-									attr[0] = "ÎÄ¼şÃû£º\n"+file.getName();
-									attr[1] = "´óĞ¡£º"+String.valueOf(getLength(file))+"Byte";
-									attr[2] = "ĞŞ¸ÄÊ±¼ä£º\n"+(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(file.lastModified());
-									attr[3] = "¾ø¶ÔÂ·¾¶£º\n"+file.getAbsolutePath();
+									attr[0] = "æ–‡ä»¶åï¼š\n"+file.getName();
+									attr[1] = "å¤§å°ï¼š"+String.valueOf(getLength(file))+"Byte";
+									attr[2] = "ä¿®æ”¹æ—¶é—´ï¼š\n"+(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(file.lastModified());
+									attr[3] = "ç»å¯¹è·¯å¾„ï¼š\n"+file.getAbsolutePath();
 									
-									new AlertDialog.Builder(MainActivity.this).setTitle("ÊôĞÔĞÅÏ¢").setItems(
-											attr, null).setNegativeButton("È·¶¨", null).show();
+									new AlertDialog.Builder(MainActivity.this).setTitle("å±æ€§ä¿¡æ¯").setItems(
+											attr, null).setNegativeButton("ç¡®å®š", null).show();
 									break;
 
 								default:
@@ -503,7 +503,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ·µ»ØÉ¾³ıÎÄ¼şºóµÄ¿ÕÎÄ¼ş¼ĞÁĞ±í
+	 * è¿”å›åˆ é™¤æ–‡ä»¶åçš„ç©ºæ–‡ä»¶å¤¹åˆ—è¡¨
 	 * */
 	public void delete(File delFile) {
 		Log.v(Name, "level1 delete");
@@ -523,7 +523,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * »ñÈ¡ÎÄ¼ş/ÎÄ¼ş¼Ğ´óĞ¡
+	 * è·å–æ–‡ä»¶/æ–‡ä»¶å¤¹å¤§å°
 	 * */
 	private long getLength(File file) {
 		Log.v(Name, "level1 getLength");
@@ -542,7 +542,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ¸´ÖÆ¹¦ÄÜ£¬startFilePathÎªÎÄ¼şÔ´Â·¾¶£¬desFilePathÎªÄ¿µÄÂ·¾¶
+	 * å¤åˆ¶åŠŸèƒ½ï¼ŒstartFilePathä¸ºæ–‡ä»¶æºè·¯å¾„ï¼ŒdesFilePathä¸ºç›®çš„è·¯å¾„
 	 * */
 	public boolean copy(String startFilePath, String desFilePath) {
 		Log.v(Name, "level1 copy");
@@ -551,21 +551,21 @@ public class MainActivity extends Activity implements OnClickListener,
 		this.startFilePath = startFilePath;
 		this.desFilePath = desFilePath;
 
-		// ÅĞ¶ÏÊÇ·ñ·µ»Ø³É¹¦µÄ±äÁ¿
+		// åˆ¤æ–­æ˜¯å¦è¿”å›æˆåŠŸçš„å˜é‡
 		boolean copyFinished = false;
 
 		File startFile = new File(startFilePath);
 		File desFile = new File(desFilePath);
 
-		// Èç¹ûÔ´ÎÄ¼şÊÇ¸öÎÄ¼ş
+		// å¦‚æœæºæ–‡ä»¶æ˜¯ä¸ªæ–‡ä»¶
 		if (startFile.isFile()) {
 			Log.v(Name, "level2 startFIle.isFile");
 			copyFinished = this.copySingleFile(startFile, desFile);
 
-			// Èç¹ûÔ´ÎÄ¼şÊÇ¸öÎÄ¼ş¼Ğ£¬¾ÍĞèÒªµİ¹é¸´ÖÆ
+			// å¦‚æœæºæ–‡ä»¶æ˜¯ä¸ªæ–‡ä»¶å¤¹ï¼Œå°±éœ€è¦é€’å½’å¤åˆ¶
 		} else {
 			Log.v(Name, "level2 !delFile.isFile()");
-			// Èç¹ûÄ¿±êÎÄ¼ş¼ĞÊÇÔ´ÎÄ¼ş¼ĞµÄÒ»¸ö×ÓÄ¿Â¼µÄÇé¿ö£¬¾Ü¾ø¸´ÖÆ£¬ÒòÎª»áÔì³ÉÎŞÏŞÑ­»·
+			// å¦‚æœç›®æ ‡æ–‡ä»¶å¤¹æ˜¯æºæ–‡ä»¶å¤¹çš„ä¸€ä¸ªå­ç›®å½•çš„æƒ…å†µï¼Œæ‹’ç»å¤åˆ¶ï¼Œå› ä¸ºä¼šé€ æˆæ— é™å¾ªç¯
 			if (desFilePath.startsWith(startFilePath)) {
 				Log.v(Name, "level3 startWith");
 				System.out.println("error copy");
@@ -579,14 +579,14 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ¸´ÖÆµ¥¸öÎÄ¼ş£¬Èç¹û¸´ÖÆ¶à¸öÎÄ¼ş¿ÉÒÔµİ¹éµ÷ÓÃ
+	 * å¤åˆ¶å•ä¸ªæ–‡ä»¶ï¼Œå¦‚æœå¤åˆ¶å¤šä¸ªæ–‡ä»¶å¯ä»¥é€’å½’è°ƒç”¨
 	 */
 	private boolean copySingleFile(File startSingleFile, File desSingleFile) {
 
 		Log.v(Name, "level1 copySingleFile");
 		boolean rightCopy = false;
 
-		// -------´ÓÔ´ÎÄ¼şÖĞÊäÈëÄÚ´æÈëbyteÖĞ£¬ÔÚ½«byteĞ´ÈëÄ¿±êÎÄ¼ş--------------------
+		// -------ä»æºæ–‡ä»¶ä¸­è¾“å…¥å†…å­˜å…¥byteä¸­ï¼Œåœ¨å°†byteå†™å…¥ç›®æ ‡æ–‡ä»¶--------------------
 		FileInputStream singleFileInputStream = null;
 		DataInputStream singleDataInputStream = null;
 		FileOutputStream singleFileOutputStream = null;
@@ -612,7 +612,7 @@ public class MainActivity extends Activity implements OnClickListener,
 				singleDataOutputStream.write(b, 0, len);
 				progressDialog.setProgress(currentLen / (1024));
 			}
-			// Ë¢ĞÂ»º³åÇø
+			// åˆ·æ–°ç¼“å†²åŒº
 			singleDataOutputStream.flush();
 
 		} catch (Exception e) {
@@ -630,7 +630,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			}
 		}
 
-		// ÅĞ¶ÏÔ´ÎÄ¼şºÍÄ¿±êÎÄ¼ş´óĞ¡ÊÇ·ñÏàÍ¬£¬Èç¹ûÏàÍ¬Ö¤Ã÷¸´ÖÆ³É¹¦
+		// åˆ¤æ–­æºæ–‡ä»¶å’Œç›®æ ‡æ–‡ä»¶å¤§å°æ˜¯å¦ç›¸åŒï¼Œå¦‚æœç›¸åŒè¯æ˜å¤åˆ¶æˆåŠŸ
 		if (startSingleFile.length() == desSingleFile.length()) {
 			Log.v(Name, "level2 copy_success");
 			rightCopy = true;
@@ -643,13 +643,13 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * µİ¹é¸´ÖÆÎÄ¼ş¼Ğ£¬ÒòÎªÎÄ¼ş¼ĞÏÂ²»Ö¹Ò»¸öÎÄ¼ş£¬ÀïÃæ¿ÉÄÜÓĞÎÄ¼ş»òÎÄ¼ş¼Ğ£¬ Òò´ËĞèÒªµ÷ÓÃµİ¹é·½·¨
+	 * é€’å½’å¤åˆ¶æ–‡ä»¶å¤¹ï¼Œå› ä¸ºæ–‡ä»¶å¤¹ä¸‹ä¸æ­¢ä¸€ä¸ªæ–‡ä»¶ï¼Œé‡Œé¢å¯èƒ½æœ‰æ–‡ä»¶æˆ–æ–‡ä»¶å¤¹ï¼Œ å› æ­¤éœ€è¦è°ƒç”¨é€’å½’æ–¹æ³•
 	 * 
 	 * @param startFolder
-	 *            = ĞèÒª¸´ÖÆµÄÎÄ¼ş¼Ğ
+	 *            = éœ€è¦å¤åˆ¶çš„æ–‡ä»¶å¤¹
 	 * @param desFolder
-	 *            = ¸´ÖÆÄ¿µÄµØµÄÎÄ¼ş¼Ğ
-	 * @return = true ±íÊ¾³É¹¦£¬false ±íÊ¾Ê§°Ü
+	 *            = å¤åˆ¶ç›®çš„åœ°çš„æ–‡ä»¶å¤¹
+	 * @return = true è¡¨ç¤ºæˆåŠŸï¼Œfalse è¡¨ç¤ºå¤±è´¥
 	 */
 
 	public boolean copyFolder(File startFolder, File desFolder) {
@@ -663,58 +663,58 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ¸´ÖÆÎÄ¼ş¼Ğº¯Êı£¬´Ëº¯ÊıÊÇ¸öµİ¹é£¬»á¸´ÖÆÎÄ¼ş¼ĞÏÂµÄËùÓĞÎÄ¼ş
+	 * å¤åˆ¶æ–‡ä»¶å¤¹å‡½æ•°ï¼Œæ­¤å‡½æ•°æ˜¯ä¸ªé€’å½’ï¼Œä¼šå¤åˆ¶æ–‡ä»¶å¤¹ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 	 * 
 	 * @param recFileFolder
-	 *            = ĞèÒª¿½±´µÄÎÄ¼ş¼Ğ»ò×ÓÎÄ¼ş¼Ğ
+	 *            = éœ€è¦æ‹·è´çš„æ–‡ä»¶å¤¹æˆ–å­æ–‡ä»¶å¤¹
 	 * @param recDesFolder
-	 *            = ¿½±´µÄÄ¿µÄÎÄ¼ş¼Ğ»ò×ÓÎÄ¼ş¼Ğ£¬
-	 * @return = true±íÊ¾³É¹¦£¬ false±íÊ¾Ê§°Ü
+	 *            = æ‹·è´çš„ç›®çš„æ–‡ä»¶å¤¹æˆ–å­æ–‡ä»¶å¤¹ï¼Œ
+	 * @return = trueè¡¨ç¤ºæˆåŠŸï¼Œ falseè¡¨ç¤ºå¤±è´¥
 	 */
 	private boolean recursionCopy(File recFileFolder, File recDesFolder) {
 
 		Log.v(Name, "level1 recursionCopy");
 		File desFolder = recDesFolder;
 
-		// ÒòÎªÄ¿µÄÎÄ¼ş¼Ğ»ò×ÓÎÄ¼ş¼Ğ²»´æÔÚ£¬ĞèÒª´´½¨
+		// å› ä¸ºç›®çš„æ–‡ä»¶å¤¹æˆ–å­æ–‡ä»¶å¤¹ä¸å­˜åœ¨ï¼Œéœ€è¦åˆ›å»º
 		desFolder.mkdir();
 
-		// ´ËÎªĞèÒª¿½±´µÄÎÄ¼ş¼ĞÏÂµÄËùÓĞÎÄ¼şÁĞ±í£¨ÆäÖĞÓĞÎÄ¼şºÍÎÄ¼ş¼Ğ£©
+		// æ­¤ä¸ºéœ€è¦æ‹·è´çš„æ–‡ä»¶å¤¹ä¸‹çš„æ‰€æœ‰æ–‡ä»¶åˆ—è¡¨ï¼ˆå…¶ä¸­æœ‰æ–‡ä»¶å’Œæ–‡ä»¶å¤¹ï¼‰
 		File[] files = recFileFolder.listFiles();
 
-		// Èç¹ûÊÇ¸ö¿ÕÎÄ¼ş¼Ğ
+		// å¦‚æœæ˜¯ä¸ªç©ºæ–‡ä»¶å¤¹
 		if (files.length == 0)
 			return true;
 
 		/*
-		 * ½«ÎÄ¼ş¼ĞÏÂËùÓĞÎÄ¼ş·ÅÈëforÑ­»·£¬Èç¹ûÊÇÎÄ¼ş£¬ÄÇÃ´µ÷ÓÃcopySingleFile()¿½±´ÎÄ¼ş£¬ Èç¹ûÊÇÎÄ¼ş¼Ğ£¬ÄÇÃ´µİ¹éµ÷ÓÃ´Ëº¯Êı
+		 * å°†æ–‡ä»¶å¤¹ä¸‹æ‰€æœ‰æ–‡ä»¶æ”¾å…¥forå¾ªç¯ï¼Œå¦‚æœæ˜¯æ–‡ä»¶ï¼Œé‚£ä¹ˆè°ƒç”¨copySingleFile()æ‹·è´æ–‡ä»¶ï¼Œ å¦‚æœæ˜¯æ–‡ä»¶å¤¹ï¼Œé‚£ä¹ˆé€’å½’è°ƒç”¨æ­¤å‡½æ•°
 		 */
 		for (File thisFile : files) {
 
-			// Èç¹û´ËÎÄ¼şÊÇ¸öÎÄ¼ş£¬ÄÇÃ´Ö±½Óµ÷ÓÃµ¥¸öÎÄ¼ş¸´ÖÆÃüÁî¸´ÖÆÎÄ¼ş
+			// å¦‚æœæ­¤æ–‡ä»¶æ˜¯ä¸ªæ–‡ä»¶ï¼Œé‚£ä¹ˆç›´æ¥è°ƒç”¨å•ä¸ªæ–‡ä»¶å¤åˆ¶å‘½ä»¤å¤åˆ¶æ–‡ä»¶
 			if (thisFile.isFile()) {
-				// µÃµ½´ËÎÄ¼şµÄĞÂÎ»ÖÃµØÖ·
+				// å¾—åˆ°æ­¤æ–‡ä»¶çš„æ–°ä½ç½®åœ°å€
 				String desContentFilePath = this.getSubFilePath(startFilePath,
 						desFilePath, thisFile.getAbsolutePath());
 
 				boolean rightCopy = this.copySingleFile(thisFile, new File(
 						desContentFilePath));
 
-				// Èç¹û¸´ÖÆÊ§°Ü£¬¾ÍÌø³öÑ­»·Í£Ö¹¸´ÖÆ
+				// å¦‚æœå¤åˆ¶å¤±è´¥ï¼Œå°±è·³å‡ºå¾ªç¯åœæ­¢å¤åˆ¶
 				if (!rightCopy)
 					return false;
 
-				// Èç¹ûÊÇ¸öÎÄ¼ş¼Ğ
+				// å¦‚æœæ˜¯ä¸ªæ–‡ä»¶å¤¹
 			} else {
 
 				/*
-				 * ´Ëº¯ÊıÊÇÎªÁËµÃµ½Ä¿µÄÎÄ¼ş¼ĞµÄµØÖ·£¬ Èç£ºÔ´ÎÄ¼ş¼ĞÎª£ºD:/yingzi/text (ÆäÖĞtextÎÄ¼ş¼ĞÏÂÓĞÁíÒ»¸öÎÄ¼ş¼Ğ
-				 * second : D:/yingzi/text/second) Ä¿±êÎ»ÖÃÎª£ºE:/level1/text
-				 * ÄÇÃ´´ËsecondÎÄ¼ş¼ĞÔÚÄ¿±êµØÖ·µÄÎ»ÖÃ¾ÍÊÇ E:/level1/text/second
+				 * æ­¤å‡½æ•°æ˜¯ä¸ºäº†å¾—åˆ°ç›®çš„æ–‡ä»¶å¤¹çš„åœ°å€ï¼Œ å¦‚ï¼šæºæ–‡ä»¶å¤¹ä¸ºï¼šD:/yingzi/text (å…¶ä¸­textæ–‡ä»¶å¤¹ä¸‹æœ‰å¦ä¸€ä¸ªæ–‡ä»¶å¤¹
+				 * second : D:/yingzi/text/second) ç›®æ ‡ä½ç½®ä¸ºï¼šE:/level1/text
+				 * é‚£ä¹ˆæ­¤secondæ–‡ä»¶å¤¹åœ¨ç›®æ ‡åœ°å€çš„ä½ç½®å°±æ˜¯ E:/level1/text/second
 				 */
 				String desContentFilePath = this.getSubFilePath(startFilePath,
 						desFilePath, thisFile.getAbsolutePath());
-				// µİ¹éµÄµ÷ÓÃ´Ëº¯Êı£¬È·±£º¯Êı¶¼±»¸´ÖÆÍêÈ«
+				// é€’å½’çš„è°ƒç”¨æ­¤å‡½æ•°ï¼Œç¡®ä¿å‡½æ•°éƒ½è¢«å¤åˆ¶å®Œå…¨
 				boolean rightCopy = recursionCopy(thisFile, new File(
 						desContentFilePath));
 				if (!rightCopy)
@@ -726,11 +726,11 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * ´Ëº¯ÊıÊÇÎªÁËµÃµ½Ä¿µÄÎÄ¼ş¼ĞµÄµØÖ·£¬ Èç£ºÔ´ÎÄ¼ş¼ĞÎª£ºD:/yingzi/text (ÆäÖĞtextÎÄ¼ş¼ĞÏÂÓĞÁíÒ»¸öÎÄ¼ş¼Ğ second :
-	 * D:/yingzi/text/second) Ä¿±êÎ»ÖÃÎª£ºE:/level1/text ÄÇÃ´´ËsecondÎÄ¼ş¼ĞÔÚÄ¿±êµØÖ·µÄÎ»ÖÃ¾ÍÊÇ
-	 * E:/level1/text/second ´Ë·½·¨ÖĞ startFolderPath = D:/yingzi/text (Ô´ÎÄ¼ş¼Ğ) £»
-	 * desFolderPath = E:/level1/text (Ä¿±êÎ»ÖÃ)£» currentFilePath =
-	 * D:/yingzi/text/second(ĞèÒª¸´ÖÆµÄ×ÓÎÄ¼ş¼Ğ) ·µ»ØÖµÎª£º E:/level1/text/second
+	 * æ­¤å‡½æ•°æ˜¯ä¸ºäº†å¾—åˆ°ç›®çš„æ–‡ä»¶å¤¹çš„åœ°å€ï¼Œ å¦‚ï¼šæºæ–‡ä»¶å¤¹ä¸ºï¼šD:/yingzi/text (å…¶ä¸­textæ–‡ä»¶å¤¹ä¸‹æœ‰å¦ä¸€ä¸ªæ–‡ä»¶å¤¹ second :
+	 * D:/yingzi/text/second) ç›®æ ‡ä½ç½®ä¸ºï¼šE:/level1/text é‚£ä¹ˆæ­¤secondæ–‡ä»¶å¤¹åœ¨ç›®æ ‡åœ°å€çš„ä½ç½®å°±æ˜¯
+	 * E:/level1/text/second æ­¤æ–¹æ³•ä¸­ startFolderPath = D:/yingzi/text (æºæ–‡ä»¶å¤¹) ï¼›
+	 * desFolderPath = E:/level1/text (ç›®æ ‡ä½ç½®)ï¼› currentFilePath =
+	 * D:/yingzi/text/second(éœ€è¦å¤åˆ¶çš„å­æ–‡ä»¶å¤¹) è¿”å›å€¼ä¸ºï¼š E:/level1/text/second
 	 */
 	private String getSubFilePath(String startFolderPath, String desFolderPath,
 			String currentFilePath) {
