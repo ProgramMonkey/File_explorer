@@ -114,9 +114,11 @@ public class MainActivity extends Activity implements OnClickListener,
 		}
 	}
 
+
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
+	public void onBackPressed()
 	{
+		// TODO Auto-generated method stub
 		Log.v(Name, "level1 onKeyDown");
 		// TODO Auto-generated method stub
 		Map<String, Object> map = (Map<String, Object>) this.listView.getItemAtPosition(0);
@@ -127,14 +129,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		{
 			Log.v(Name, "level2 notrootDir");
 			loadFiles(file);
-			return true;
 		}
 		else//如果为根目录，则退出
 		{
 			Log.v(Name, "level2 isrootDir");
-			return super.onKeyDown(keyCode, event);
+			MainActivity.this.finish();
 
 		} 
+
 	}
 
 
