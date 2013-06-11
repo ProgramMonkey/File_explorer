@@ -84,7 +84,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		
 		//设置根目录
 		
-		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//判断书籍是否插入SD卡
 			Log.v(Name, "level2 Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)");
 			rootDir = Environment.getExternalStorageDirectory();
 		} else {
@@ -108,6 +108,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	}
 
 	@Override
+	//初始化菜单，只会在第一次初始化菜单时调用
 	public boolean onCreateOptionsMenu(Menu menu) {
 		Log.v(Name, "level1 onCreateOptionsMenu");
 		MenuInflater inflater = getMenuInflater();
