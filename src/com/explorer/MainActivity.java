@@ -28,6 +28,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -108,6 +109,31 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		Log.v(Name, "level1 onKeyDown");
+		// TODO Auto-generated method stub
+		Map<String, Object> map = (Map<String, Object>) this.listView.getItemAtPosition(0);
+		final File file = (File) map.get("file");
+		final String str = (String)map.get("name");
+		//如果不是根目录，则返回上一层目录
+		if(str.equals("上一级目录"))
+		{
+			Log.v(Name, "level2 notrootDir");
+			loadFiles(file);
+			return true;
+		}
+		else//如果为根目录，则退出
+		{
+			Log.v(Name, "level2 isrootDir");
+			return super.onKeyDown(keyCode, event);
+
+		} 
+	}
+
+
+
+	@Override
 	//初始化菜单，只会在第一次初始化菜单时调用
 	public boolean onCreateOptionsMenu(Menu menu) {
 		Log.v(Name, "level1 onCreateOptionsMenu");
@@ -116,6 +142,8 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		return true;
 	}
 
+	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Log.v(Name, "level1 onOptionsItemSelected");
