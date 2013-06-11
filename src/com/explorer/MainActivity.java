@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -47,24 +48,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
-
 import com.file.R;
 
-public class MainActivity extends Activity implements OnClickListener, OnItemClickListener, OnItemLongClickListener {
-	private TextView currentDir;//用于显示文件夹的额目录，载入相应的文件夹，为新建的文件夹建立相应的目录
-	private Button btnC;//手机内存 用于定位根目录
-	private Button btnE;//存储卡 用于定位根目录
+public class MainActivity extends Activity implements OnClickListener,
+		OnItemClickListener, OnItemLongClickListener {
+	private TextView currentDir;// 用于显示文件夹的额目录，载入相应的文件夹，为新建的文件夹建立相应的目录
+	private Button btnC;// 手机内存 用于定位根目录
+	private Button btnE;// 存储卡 用于定位根目录
 	private ListView listView; // 显示相应按文件夹
-	private File rootDir; //根目录文件夹
-	private File copyPath; //当执行复制、粘贴等工作时，将原地址存储到copyPath中记录
-	private String flag;//用于记录执行的操作，包括复制、剪切等
-	private String startFilePath;//当执行粘贴等工作时，记录原地址
-	private String desFilePath;//当执行粘贴等工作时记录目的地址
-	private ProgressDialog progressDialog;//用于复制时的进度条
-	private int currentLen = 0;//用于记录复制当前的文件（夹）数
-	private long totaLength = 0;//用于记录总共要复制的文件（夹）数
+	private File rootDir; // 根目录文件夹
+	private File copyPath; // 当执行复制、粘贴等工作时，将原地址存储到copyPath中记录
+	private String flag;// 用于记录执行的操作，包括复制、剪切等
+	private String startFilePath;// 当执行粘贴等工作时，记录原地址
+	private String desFilePath;// 当执行粘贴等工作时记录目的地址
+	private ProgressDialog progressDialog;// 用于复制时的进度条
+	private int currentLen = 0;// 用于记录复制当前的文件（夹）数
+	private long totaLength = 0;// 用于记录总共要复制的文件（夹）数
 	private Handler messageHandler; // 主要接受子线程发送的数据, 并用此数据配合主线程更新UI.
-	private static String Name = "MainActivity";  
+	private static String Name = "MainActivity";
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,29 +75,32 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		setContentView(R.layout.main);
 		currentDir = (TextView) findViewById(R.id.currentDir);
 		// fileName = (TextView) findViewById(R.id.name);
-		btnC = (Button) findViewById(R.id.btnC);//手机内存按钮的声明
-		btnE = (Button) findViewById(R.id.btnE);//存储卡按钮的声明
-		btnC.setOnClickListener(this);//为手机内存按钮设置监听器
-		btnE.setOnClickListener(this);//为存储卡按钮设置监听器
-		listView = (ListView) findViewById(R.id.listView);//文件列表的晟敏
-		listView.setOnItemClickListener(this);//为每个文件（夹）设置短按的监听器
-		listView.setOnItemLongClickListener(this);//为每个文件（夹）设置长按的监听器
-		//得到当前线程的Looper实例，由于当前线程是UI线程也可以通过Looper.getMainLooper()得到
+		btnC = (Button) findViewById(R.id.btnC);// 手机内存按钮的声明
+		btnE = (Button) findViewById(R.id.btnE);// 存储卡按钮的声明
+		btnC.setOnClickListener(this);// 为手机内存按钮设置监听器
+		btnE.setOnClickListener(this);// 为存储卡按钮设置监听器
+		listView = (ListView) findViewById(R.id.listView);// 文件列表的晟敏
+		listView.setOnItemClickListener(this);// 为每个文件（夹）设置短按的监听器
+		listView.setOnItemLongClickListener(this);// 为每个文件（夹）设置长按的监听器
+		// 得到当前线程的Looper实例，由于当前线程是UI线程也可以通过Looper.getMainLooper()得到
 		messageHandler = new MessageHandler(Looper.myLooper());
-		
-		//设置根目录
-		
-		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//判断书籍是否插入SD卡
-			Log.v(Name, "level2 Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)");
+
+		// 设置根目录
+
+		if (Environment.getExternalStorageState().equals(//判断是否挂载SD卡
+				Environment.MEDIA_MOUNTED)) {
+			Log.v(Name,
+					"level2 Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)");
 			rootDir = Environment.getExternalStorageDirectory();
 		} else {
-			Log.v(Name, "level2 !Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)");
+			Log.v(Name,
+					"level2 !Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)");
 			rootDir = Environment.getRootDirectory();
 		}
 		loadFiles(rootDir);
 	}
 
-	//自定义Handler
+	// 自定义Handler
 	class MessageHandler extends Handler {
 		public MessageHandler(Looper looper) {
 			super(looper);
@@ -103,7 +108,8 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 
 		@Override
 		public void handleMessage(Message msg) {
-			Log.v(Name, "test initial rootdir" + currentDir.getText().toString());
+			Log.v(Name, "test initial rootdir"
+					+ currentDir.getText().toString());
 			loadFiles(new File(currentDir.getText().toString()));
 		}
 	}
@@ -147,35 +153,46 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Log.v(Name, "level1 onOptionsItemSelected");
-		
-		//如果选择的是新建文件夹选项
+
+		// 如果选择的是新建文件夹选项
 		if (item.getItemId() == R.id.newFile) {
 			Log.v(Name, "level2 item.getItemId() == R.id.newFile");
 			LayoutInflater factory = LayoutInflater.from(MainActivity.this);
 			final View view = factory.inflate(R.layout.rename, null);
-			AlertDialog d = new AlertDialog.Builder(MainActivity.this).setCancelable(true).setMessage("文件夹名")
-					.setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Log.v(Name, "level3 onClick");
-							String dirName = ((EditText) view.findViewById(R.id.rename)).getText().toString();
-							String newFile = currentDir.getText().toString() + "/" + dirName;
-							if (new File(newFile).exists()) {
-								Log.v(Name, "level4 File(newFile).exits");
-								Toast.makeText(MainActivity.this, "文件夹已存在", Toast.LENGTH_LONG).show();
-								return;
-							}
-							File f = new File(currentDir.getText().toString(), dirName);
-							f.mkdir();
-							loadFiles(new File(currentDir.getText().toString()));
-							Log.v(Name, "level test2");
-						}
-					}).create();
+			AlertDialog d = new AlertDialog.Builder(MainActivity.this)
+					.setCancelable(true)
+					.setMessage("文件夹名")
+					.setView(view)
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Log.v(Name, "level3 onClick");
+									String dirName = ((EditText) view
+											.findViewById(R.id.rename))
+											.getText().toString();
+									String newFile = currentDir.getText()
+											.toString() + "/" + dirName;
+									if (new File(newFile).exists()) {
+										Log.v(Name,
+												"level 4 File(newFile).exits");
+										Toast.makeText(MainActivity.this,
+												"文件夹已存在", Toast.LENGTH_LONG)
+												.show();
+										return;
+									}
+									File f = new File(currentDir.getText()
+											.toString(), dirName);
+									f.mkdir();
+									loadFiles(new File(currentDir.getText().toString()));
+								}
+							}).create();
 			d.show();
-			
 		} else if (item.getItemId() == R.id.about) {
 			Log.v(Name, "level2 item.getItemId() == R.id.about");
-			Dialog d = new AlertDialog.Builder(MainActivity.this).setTitle("文件浏览器1.0beta").setMessage("本程序由李洪祥 赵岩制作")
+			Dialog d = new AlertDialog.Builder(MainActivity.this)
+					.setTitle("文件浏览器1.0beta").setMessage("本程序由李洪祥 赵岩制作")
 					.setPositiveButton("确定", null).create();
 			d.show();
 		} else if (item.getItemId() == R.id.exit) {
@@ -187,68 +204,75 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 
 	/**
 	 * 加载当前文件夹列表
-	 * */
+	 * 
+	 */
 	public void loadFiles(File dir) {
 		Log.v(Name, "level1 loadFiles");
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();//声明一个Map数组，用来存储文件（夹）的显示信息
-		
-		//如果目录不为空的恶化，则显示相应的文件（夹）信息
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();// 声明一个Map数组，用来存储文件（夹）的显示信息
+
+		// 如果目录不为空的化，则显示相应的文件（夹）信息
 		if (dir != null) {
 			Log.v(Name, "level2 dir!= NULL");
-			//如果不是根目录的话，则为 上级目录在ListView的最上方留一个接口
+			// 如果不是根目录的话，则为 上级目录在ListView的最上方留一个接口
 			if (!dir.getAbsolutePath().equals(rootDir.getAbsolutePath())) {
-				Log.v(Name, "level3 !dir.getAbsolutePath().equals(rootDir.getAbsolutePath())");
+				Log.v(Name,
+						"level3 !dir.getAbsolutePath().equals(rootDir.getAbsolutePath())");
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("file", dir.getParentFile());
 				map.put("name", "上一级目录");
 				map.put("img", R.drawable.folder);
 				list.add(map);
 			}
-			//设置显示目录
+			// 设置显示目录
 			currentDir.setText(dir.getAbsolutePath());
 			File[] files = dir.listFiles();
 			sortFiles(files);
-			
-			//为每跟文件（夹）的显示做准备，先将信息存储起来
-			
+
+			// 为每跟文件（夹）的显示做准备，先将信息存储起来
+
 			if (files != null) {
 				Log.v(Name, "level2 files!=NULL");
 				for (File f : files) {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("file", f);
 					map.put("name", f.getName());
-					map.put("img", f.isDirectory() ? R.drawable.folder
-							: (f.getName().toLowerCase().endsWith(".zip") ? R.drawable.zip : R.drawable.text));
+					map.put("img",
+							f.isDirectory() ? R.drawable.folder
+									: (f.getName().toLowerCase()
+											.endsWith(".zip") ? R.drawable.zip
+											: R.drawable.text));
 					list.add(map);
 				}
 			}
 
-		} else {//如果目录不存在则提示错误
+		} else {// 如果目录不存在则提示错误
 			Log.v(Name, "level2 Files == NULL");
 			Toast.makeText(this, "目录不正确，请输入正确的目录!", Toast.LENGTH_LONG).show();
 		}
-		//显示文件（夹）信息
-		ListAdapter adapter = new SimpleAdapter(this, list, R.layout.item, new String[] { "name", "img" }, new int[] {
-				R.id.name, R.id.icon });
+		// 显示文件（夹）信息
+		ListAdapter adapter = new SimpleAdapter(this, list, R.layout.item,
+				new String[] { "name", "img" }, new int[] { R.id.name,
+						R.id.icon });
 		// listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		listView.setAdapter(adapter);
 	}
 
 	/**
 	 * 排序文件列表
-	 * */
+	 * 
+	 */
 	private void sortFiles(File[] files) {
 		Log.v(Name, "level1 sortFiles");
 		Arrays.sort(files, new Comparator<File>() {
 			public int compare(File file1, File file2) {
-				if (file1.isDirectory() && file2.isDirectory())
-				{
-					Log.v(Name, "level2 file1.isDirectory() && file2.isDirectory()");
+				if (file1.isDirectory() && file2.isDirectory()) {
+					Log.v(Name,
+							"level2 file1.isDirectory() && file2.isDirectory()");
 					return 1;
 				}
-				if (file2.isDirectory())
-				{
-					Log.v(Name, "level2 !file1.isDirectory() && file2.isDirectory()");
+				if (file2.isDirectory()) {
+					Log.v(Name,
+							"level2 !file1.isDirectory() && file2.isDirectory()");
 					return 1;
 				}
 				return -1;
@@ -270,7 +294,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		// 获取文件file的MIME类型
 		String type = getMIMEType(file);
 		// 设置intent的data和Type属性。
-		intent.setDataAndType(Uri.fromFile(file),type);
+		intent.setDataAndType(Uri.fromFile(file), type);
 		// 跳转
 		startActivity(intent);
 
@@ -293,8 +317,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		}
 		/* 获取文件的后缀名 */
 		String end = fName.substring(dotIndex, fName.length()).toLowerCase();
-		if (end == "")
-		{
+		if (end == "") {
 			Log.v(Name, "level2 end ==  ");
 			return type;
 		}
@@ -309,33 +332,36 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	@Override
 	public void onClick(View v) {
 		Log.v(Name, "level1 onClick");
-		if (v.getId() == R.id.btnC) { 
+		if (v.getId() == R.id.btnC) {
 			rootDir = Environment.getRootDirectory();
 			loadFiles(rootDir);
 		} else if (v.getId() == R.id.btnE) {
-			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			if (Environment.getExternalStorageState().equals(
+					Environment.MEDIA_MOUNTED)) {
 				rootDir = Environment.getExternalStorageDirectory();
 				loadFiles(rootDir);
 			}
 		}
 
 	}
-	
+
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 		Log.v(Name, "level1 onItemClick");
-		//获取文件（夹）的引用
-		Map<String, Object> map = (Map<String, Object>) parent.getItemAtPosition(position);
+		// 获取文件（夹）的引用
+		Map<String, Object> map = (Map<String, Object>) parent
+				.getItemAtPosition(position);
 		final File file = (File) map.get("file");
-		//如果是文件夹的话，则进入此文件夹，显示此文件夹的内容
+		// 如果是文件夹的话，则进入此文件夹，显示此文件夹的内容
 		if (file.isDirectory()) {
 			Log.v(Name, "level2 file.isDirectory");
 			try {
 				loadFiles(file);
-			} catch (Exception e) {//若遇到权限不足的情况，则弹出警告
+			} catch (Exception e) {// 若遇到权限不足的情况，则弹出警告
 				Toast.makeText(this, "权限不足", Toast.LENGTH_SHORT).show();
 			}
-		} else {//如过是文件，则选择相应应用打开此文件
+		} else {// 如过是文件，则选择相应应用打开此文件
 			openFile(file);
 		}
 	}
@@ -353,17 +379,17 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 							public void onClick(DialogInterface dialog, int which) {
 								switch (which) {
 
-								case 0:
+								case 0: // 复制
 									Log.v(Name, "level2 copy");
 									copyPath = new File(file.getAbsolutePath());
 									flag = "copy";
 									break;
-								case 1:
+								case 1: // 剪切
 									Log.v(Name, "level2 cut");
 									copyPath = new File(file.getAbsolutePath());
 									flag = "cut";
 									break;
-								case 2:
+								case 2: // 粘贴
 									Log.v(Name, "level2 paste");
 									final String startPath = copyPath.getAbsolutePath();
 									final String desPath = currentDir.getText().toString() + "/" + copyPath.getName();
@@ -402,10 +428,10 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 										}
 									}.start();
 									break;
-								case 3:
+								case 3: // 发送
 									Log.v(Name, "level2 send");
 									break;
-								case 4:
+								case 4: // 重命名
 									Log.v(Name, "level2 newName");
 									LayoutInflater factory = LayoutInflater.from(MainActivity.this);
 									final View view = factory.inflate(R.layout.rename, null);
@@ -429,7 +455,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 									d.show();
 									loadFiles(new File(currentDir.getText().toString()));
 									break;
-								case 5:
+								case 5: // 删除
 									Log.v(Name, "level2 delete");
 									AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
 											.setMessage("确实要删除" + file.getName() + "吗?").setCancelable(true)
@@ -449,11 +475,22 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 									ad.show();
 			
 									break;
+								case 6: // 显示属性
+									String[] attr = new String[] {"1", "2", "3", "4"};
+
+									attr[0] = "文件名：\n"+file.getName();
+									attr[1] = "大小："+String.valueOf(getLength(file))+"Byte";
+									attr[2] = "修改时间：\n"+(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(file.lastModified());
+									attr[3] = "绝对路径：\n"+file.getAbsolutePath();
+									
+									new AlertDialog.Builder(MainActivity.this).setTitle("属性信息").setItems(
+											attr, null).setNegativeButton("确定", null).show();
+									break;
 
 								default:
 									break;
 								}
-								Toast.makeText(MainActivity.this, "" + which, Toast.LENGTH_LONG).show();
+//								Toast.makeText(MainActivity.this, "" + which, Toast.LENGTH_LONG).show();
 							}
 						}).create();
 		dialog.show();
@@ -482,7 +519,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 			delFile.delete();
 		}
 
-		return ;
+		return;
 	}
 
 	/**
@@ -490,6 +527,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	 * */
 	private long getLength(File file) {
 		Log.v(Name, "level1 getLength");
+		totaLength = 0;
 		if (file.isDirectory()) {
 			Log.v(Name, "level2 file.isDirectory");
 			File[] files = file.listFiles();
@@ -521,7 +559,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 
 		// 如果源文件是个文件
 		if (startFile.isFile()) {
-			Log.v(Name,"level2 startFIle.isFile");
+			Log.v(Name, "level2 startFIle.isFile");
 			copyFinished = this.copySingleFile(startFile, desFile);
 
 			// 如果源文件是个文件夹，就需要递归复制
@@ -532,8 +570,7 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 				Log.v(Name, "level3 startWith");
 				System.out.println("error copy");
 				return false;
-			} else
-			{
+			} else {
 				Log.v(Name, "level3 !startWith");
 				copyFinished = this.copyFolder(startFile, desFile);
 			}
@@ -559,11 +596,13 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 
 			singleFileInputStream = new FileInputStream(startSingleFile);
 
-			singleDataInputStream = new DataInputStream(new BufferedInputStream(singleFileInputStream));
+			singleDataInputStream = new DataInputStream(
+					new BufferedInputStream(singleFileInputStream));
 
 			singleFileOutputStream = new FileOutputStream(desSingleFile);
 
-			singleDataOutputStream = new DataOutputStream(new BufferedOutputStream(singleFileOutputStream));
+			singleDataOutputStream = new DataOutputStream(
+					new BufferedOutputStream(singleFileOutputStream));
 
 			byte[] b = new byte[1024];
 
@@ -592,13 +631,10 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		}
 
 		// 判断源文件和目标文件大小是否相同，如果相同证明复制成功
-		if (startSingleFile.length() == desSingleFile.length())
-		{
+		if (startSingleFile.length() == desSingleFile.length()) {
 			Log.v(Name, "level2 copy_success");
 			rightCopy = true;
-		}
-		else
-		{
+		} else {
 			Log.v(Name, "level2 copy_failed");
 			rightCopy = false;
 		}
@@ -658,9 +694,11 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 			// 如果此文件是个文件，那么直接调用单个文件复制命令复制文件
 			if (thisFile.isFile()) {
 				// 得到此文件的新位置地址
-				String desContentFilePath = this.getSubFilePath(startFilePath, desFilePath, thisFile.getAbsolutePath());
+				String desContentFilePath = this.getSubFilePath(startFilePath,
+						desFilePath, thisFile.getAbsolutePath());
 
-				boolean rightCopy = this.copySingleFile(thisFile, new File(desContentFilePath));
+				boolean rightCopy = this.copySingleFile(thisFile, new File(
+						desContentFilePath));
 
 				// 如果复制失败，就跳出循环停止复制
 				if (!rightCopy)
@@ -674,9 +712,11 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 				 * second : D:/yingzi/text/second) 目标位置为：E:/level1/text
 				 * 那么此second文件夹在目标地址的位置就是 E:/level1/text/second
 				 */
-				String desContentFilePath = this.getSubFilePath(startFilePath, desFilePath, thisFile.getAbsolutePath());
+				String desContentFilePath = this.getSubFilePath(startFilePath,
+						desFilePath, thisFile.getAbsolutePath());
 				// 递归的调用此函数，确保函数都被复制完全
-				boolean rightCopy = recursionCopy(thisFile, new File(desContentFilePath));
+				boolean rightCopy = recursionCopy(thisFile, new File(
+						desContentFilePath));
 				if (!rightCopy)
 					return false;
 			}
@@ -692,10 +732,11 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 	 * desFolderPath = E:/level1/text (目标位置)； currentFilePath =
 	 * D:/yingzi/text/second(需要复制的子文件夹) 返回值为： E:/level1/text/second
 	 */
-	private String getSubFilePath(String startFolderPath, String desFolderPath, String currentFilePath) {
+	private String getSubFilePath(String startFolderPath, String desFolderPath,
+			String currentFilePath) {
 
 		Log.v(Name, "level1 getSubFilePath");
-		
+
 		String currentDesFilePath = null;
 
 		int i = startFolderPath.length();
@@ -705,7 +746,8 @@ public class MainActivity extends Activity implements OnClickListener, OnItemCli
 		// String subDirPath = startFolderPath.substring(0, i);
 		// String subDesPath = desFolderPath.substring(0, j);
 
-		currentDesFilePath = desFolderPath + "/" + currentFilePath.substring(i + 1);
+		currentDesFilePath = desFolderPath + "/"
+				+ currentFilePath.substring(i + 1);
 
 		return currentDesFilePath;
 
