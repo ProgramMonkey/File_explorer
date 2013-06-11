@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+		<Button android:text="@string/c" android:id="@+id/btnC"
+			android:layout_width="fill_parent" android:layout_weight="1"  android:layout_height="wrap_content"></Button>
+		<Button android:text="@string/e" android:id="@+id/btnE"
+			android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content"></Button>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+		<TextView android:id="@+id/currentDir" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="e:/" android:textSize="22dp"/>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/linearLayout2">
+		<ListView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/listView"></ListView>
+	</LinearLayout>
+
+</LinearLayout>

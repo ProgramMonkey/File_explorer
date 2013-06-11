@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">文件浏览器</string>
+    <string name="c">手机内存</string>
+    <string name="e">储存卡</string>
+    <string name="newFile">新建文件夹</string>
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+</resources>
