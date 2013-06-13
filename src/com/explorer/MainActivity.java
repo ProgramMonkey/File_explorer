@@ -206,12 +206,59 @@ public class MainActivity extends Activity implements OnClickListener,
 									}
 								}).create();
 				d.show();
-			} else if (item.getItemId() == R.id.about)
+			} else if (item.getItemId() == R.id.open)
 			{
-				Log.v(Name, "level2 item.getItemId() == R.id.about");
-				Dialog d = new AlertDialog.Builder(MainActivity.this)
-						.setTitle("文件浏览器1.0beta").setMessage("本程序由李洪祥 赵岩制作")
-						.setPositiveButton("确定", null).create();
+				Log.v(Name, "level2 item.getItemId() == R.id.newFile");
+				LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+				final View view = factory.inflate(R.layout.rename, null);
+				AlertDialog d = new AlertDialog.Builder(MainActivity.this)
+						.setCancelable(true)
+						.setMessage("需要打开的文件（夹）名")
+						.setView(view)
+						.setPositiveButton("确定",
+								new DialogInterface.OnClickListener()
+								{
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which)
+									{
+										Log.v(Name, "level3 onClick");
+										String dirName = ((EditText) view
+												.findViewById(R.id.rename))
+												.getText().toString();
+										String newFile = currentDir.getText()
+												.toString() + "/" + dirName;
+										if (new File(newFile).exists())
+										{
+											final File file = new File(newFile);
+											if (file.isDirectory())
+											{
+												Log.v(Name, "level2 file.isDirectory");
+												try
+												{
+													loadFiles(file);
+												} catch (Exception e)
+												{// 若遇到权限不足的情况，则弹出警告
+													
+												}
+											} else
+											{// 如过是文件，则选择相应应用打开此文件
+												openFile(file);
+											}
+										}
+										else
+										{
+											Toast.makeText(MainActivity.this,
+													"此文件（夹)不存在", Toast.LENGTH_LONG)
+													.show();
+										}
+										File f = new File(currentDir.getText()
+												.toString(), dirName);
+										f.mkdir();
+										loadFiles(new File(currentDir.getText()
+												.toString()));
+									}
+								}).create();
 				d.show();
 			} else if (item.getItemId() == R.id.exit)
 			{
