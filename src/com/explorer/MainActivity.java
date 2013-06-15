@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	private ListView listView; // 显示相应按文件夹
 	private File rootDir; // 根目录文件夹
 	private File copyPath; // 当执行复制、粘贴等工作时，将原地址存储到copyPath中记录
-	private String flag;// 用于记录执行的操作，包括复制、剪切等
+	private String flag = "no";// 用于记录执行的操作，包括复制、剪切等
 	private String startFilePath;// 当执行粘贴等工作时，记录原地址
 	private String desFilePath;// 当执行粘贴等工作时记录目的地址
 	private ProgressDialog progressDialog;// 用于复制时的进度条
@@ -72,6 +72,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	private Handler messageHandler; // 主要接受子线程发送的数据, 并用此数据配合主线程更新UI.
 	private static String Name = "MainActivity";
 	private int sort = 0; // 0 = name and type; 1 = time; 2 = size
+	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -156,7 +157,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Log.v(Name, "level1 onOptionsItemSelected");
 
-		// 如果选择的是新建文件夹选项
+		// 如果选择的是新建文件夹选项 
 		if (item.getItemId() == R.id.newFile) {
 			Log.v(Name, "level2 item.getItemId() == R.id.newFile");
 			LayoutInflater factory = LayoutInflater.from(MainActivity.this);
@@ -624,6 +625,8 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	public void paste() {
+		if(flag.equals("no"))
+			return;
 		final String startPath = copyPath.getAbsolutePath();
 		final String desPath = currentDir.getText().toString() + "/"
 				+ copyPath.getName();
