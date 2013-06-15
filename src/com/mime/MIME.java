@@ -3,7 +3,7 @@ package com.mime;
 
 public class MIME {
 	public static final String[][] MIME_MapTable={ 
-            //{ºó×ºÃû£¬MIMEÀàÐÍ} 
+            //{ï¿½ï¿½×ºï¿½ï¿½MIMEï¿½ï¿½ï¿½ï¿½} 
             {".3gp",    "video/3gpp"}, 
             {".apk",    "application/vnd.android.package-archive"}, 
             {".asf",    "video/x-ms-asf"}, 

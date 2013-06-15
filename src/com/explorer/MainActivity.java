@@ -262,11 +262,12 @@ public class MainActivity extends Activity implements OnClickListener,
 								sort = which;
 								// Toast.makeText(MainActivity.this, "" +
 								// which, Toast.LENGTH_LONG).show();
+								loadFiles(new File(currentDir.getText().toString()));
 							}
-
+							
 						}).create();
 		dialog.show();
-		loadFiles(new File(currentDir.getText().toString()));
+		
 	}
 
 	/**
@@ -360,7 +361,7 @@ public class MainActivity extends Activity implements OnClickListener,
 						return -1;
 					}
 				}
-			});
+			});;
 		} else { // type
 			Arrays.sort(files, new Comparator<File>() {
 				public int compare(File file1, File file2) {
